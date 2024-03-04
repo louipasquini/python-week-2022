@@ -26,9 +26,3 @@ class Beer(SQLModel, table=True):
     def calculate_rate(cls, v, values):
         rate = mean([values["flavor"], values["image"], values["cost"]])
         return int(rate)
-
-
-try:
-    brewdog = Beer(name="Brewdog", style="IPA", flavor=6, image=8, cost=8)
-except RuntimeError:
-    print("Ocorreu um erro nos parâmetros")
