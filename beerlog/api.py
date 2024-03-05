@@ -8,12 +8,12 @@ from beerlog.models import Beer
 api = FastAPI(title="Beerlog")
 
 @api.get("/beers/", response_model=List[BeerOut])
-def list_beers():
+async def list_beers():
   beers = get_beers_from_database()
   return beers
 
 @api.post("/beers/", response_model=BeerOut)
-def add_beer(beer_in: BeerIn):
+async def add_beer(beer_in: BeerIn):
   beer = Beer(**beer_in.dict())
   with get_session() as session:
     session.add(beer)
